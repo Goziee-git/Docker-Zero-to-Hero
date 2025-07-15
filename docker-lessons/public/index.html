@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS DevOps Node.js App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0066cc;
+        }
+        .info-box {
+            background-color: #e6f7ff;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS DevOps Zero to Hero</h1>
+        <p>This is a simple Node.js application that can be containerized and deployed to AWS.</p>
+        
+        <div class="info-box">
+            <h2>Server Information</h2>
+            <div id="server-info">Loading...</div>
+        </div>
+        
+        <button id="refresh-btn">Refresh Info</button>
+    </div>
+
+    <script>
+        function fetchServerInfo() {
+            document.getElementById('server-info').innerHTML = 'Loading...';
+            
+            fetch('/api/info')
+                .then(response => response.json())
+                .then(data => {
+                    const infoHtml = `
+                        <p><strong>Message:</strong> ${data.message}</p>
+                        <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+                        <p><strong>Environment:</strong> ${data.environment}</p>
+                    `;
+                    document.getElementById('server-info').innerHTML = infoHtml;
+                })
+                .catch(error => {
+                    document.getElementById('server-info').innerHTML = 
+                        `<p style="color: red">Error fetching data: ${error.message}</p>`;
+                });
+        }
+
+        // Fetch info when page loads
+        document.addEventListener('DOMContentLoaded', fetchServerInfo);
+        
+        // Fetch info when button is clicked
+        document.getElementById('refresh-btn').addEventListener('click', fetchServerInfo);
+    </script>
+</body>
+</html>

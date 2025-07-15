@@ -1,0 +1,24 @@
+{
+  "name": "aws-devops-nodejs-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js application for AWS DevOps Zero to Hero",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "aws",
+    "devops",
+    "nodejs",
+    "docker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
